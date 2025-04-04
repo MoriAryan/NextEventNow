@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextEventNow - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Base styles */
+        html {
+  scroll-behavior: smooth;
+}
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            line-height: 1.6;
+        }
+    
+        header {
+            background: linear-gradient(90deg, #0073e6, #005bb5);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        nav ul {
+            list-style: none;
+            margin-top: 10px;
+        }
+    
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+    
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+    
+        nav ul li a:hover {
+            color: #ffdd57;
+        }
+    
+        .hero {
+            background: url('background.jpg') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+    
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+    
+        .hero h2,
+        .hero p,
+        .hero input,
+        .hero button {
+            position: relative;
+            z-index: 2;
+        }
+    
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+    
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+    
+        .hero input {
+            padding: 12px;
+            width: 60%;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    
+        .hero button {
+            padding: 12px 25px;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        .hero button:hover {
+            background-color: #e68900;
+        }
+    
+        .next-event {
+            background: #fff;
+            padding: 40px 20px;
+            margin: 30px auto;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    
+        .next-event h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #333;
+        }
+    
+        .event-card {
+            background: #fefefe;
+            padding: 25px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+    
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+    
+        .event-card h3 {
+            color: #0073e6;
+            margin-bottom: 10px;
+        }
+    
+        .event-card p {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+    
+        .countdown {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #d9534f;
+            margin-top: 10px;
+        }
+    
+        .calendar-view {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            margin: 40px auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    
+        .calendar-view h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+    
+        .calendar-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .calendar-link:hover {
+            background-color: #218838;
+        }
+    
+        @media (max-width: 600px) {
+            .hero input {
+                width: 90%;
+            }
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+        .view-all-events-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 30px auto;
+    max-width: 600px;
+    backdrop-filter: blur(8px);
+}
+
+.view-all-events-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.view-all-events-container p {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.view-all-events-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0px 5px 10px rgba(255, 126, 95, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.view-all-events-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #feb47b, #ff7e5f);
+    box-shadow: 0px 8px 15px rgba(255, 126, 95, 0.5);
+}
+.contact-simple {
+  background-color: #f4f4f4;
+  padding: 50px 20px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.contact-info {
+  background: #fff;
+  display: inline-block;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #333;
+}
+
+.contact-info p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.contact-info a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1>NextEventNow</h1>
+        <nav>
+            <ul>
+                <li><a href="newIndex.html">Home</a></li>
+                <li><a href="1.html">Events</a></li>
+                <li><a href="1.html">Categories</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h2>Never Miss an Event Again – Stay Updated with NextEventNow!</h2>
+        <p>NextEventNow is your one-stop platform to stay updated with all upcoming college events. Never miss out on important workshops, hackathons, and meetups again.</p>
+        <a href="1.html"><input type="text" id="search-input" placeholder="Search events..."></a>
+        <a href="1.html"></a><button>Search</button></a>
+    </section>
+    
+    <section class="next-event" id="next-event">
+        <h2>Next Upcoming Event(s)</h2>
+        <div id="event-container"></div>
+    </section>
+    
+    <!-- <section class="calendar-view">
+        <h2>View Events in Calendar Mode</h2>
+        <p>Click the link below to see all events in a calendar format.</p>
+        <a href="calendar.html" class="calendar-link">📅 Open Calendar View</a>
+    </section> -->
+    <div class="view-all-events-container">
+        <h2>Want to explore all events?</h2>
+        <p>Check out the full list of events categorized as Live, Upcoming, and Completed.</p>
+        <a href="1.html" class="view-all-events-btn">View All Events</a>
+    </div>
+    
+    
+
+
+      
+      <section class="contact-simple" id="contact">
+        <div class="contact-info">
+          <h2>Contact Us</h2>
+          <p><strong>Name:</strong> Mori Aryan</p>
+          <p><strong>Email:</strong> <a href="mailto:nexteventnowbyaryan@gmail.com">nexteventnowbyaryan@gmail.com</a></p>
+        </div>
+      </section>
+      
+      
+
+    <!-- { name: "Hackathon 2025", date: "2025-04-10T10:00:00" },
+            { name: "AI/ML Workshop", date: "2025-04-15T12:00:00" },
+            { name: "AI/ML Workshop", date: "2025-04-15T12:00:00" },
+            { name: "Web Dev Bootcamp", date: "2025-03-31T19:47:00" },
+            { name: "Web Dev 2v Bootcamp", date: "2025-03-31T19:04:00" },
+            { name: "Web Dev Bootcamp", date: "2025-03-31T19:47:00" },
+            { name: "Web Dev 2v Bootcamp", date: "2025-03-31T19:04:00" } -->
+    <script>
+const events = [
+            { name: "Hackathon", date: "2025-04-05T18:00:00" },
+            { name: "AI/ML Workshop", date: "2025-04-05T18:30:00"},
+            { name: "Data Science Workshop", date: "2025-04-05T18:30:00" },
+            { name: "Cybersecurity Workshop", date: "2025-04-05T18:30:00" },
+
+            // { name: "Inauguration", start: "2025-04-06T09:00:00", end: "2025-04-06T10:30:00", venue: "Lawns" },
+            // { name: "Guest Lecture", start: "2025-04-06T18:00:00", end: "2025-04-06T20:00:00", venue: "Lawns" },
+            // { name: "Science Fair", start: "2025-04-06T10:30:00", end: "2025-04-06T15:00:00", venue: "Staff Club" },
+            // { name: "aCar Rally and Drifting Show", start: "2025-04-06T19:30:00", end: "2025-04-06T23:59:00", venue: "Canteen Cements" },
+            // { name: "Robowar 3LB", start: "2025-04-06T09:00:00", end: "2025-04-06T18:00:00", venue: "Canteen Cements" },
+            // { name: "ElectroDash", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC Lawns" },
+            // { name: "Farm Track", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC Lawns" },
+            // { name: "Electro Enigma", start: "2025-04-06T11:00:00", end: "2025-04-06T17:00:00", venue: "EE Department" },
+            // { name: "Drone Helix", start: "2025-04-06T11:00:00", end: "2025-04-06T16:00:00", venue: "SAC Ground" },
+            // { name: "Line Follower", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC" },
+            // { name: "Chem E Car", start: "2025-04-06T13:00:00", end: "2025-04-06T16:00:00", venue: "Chemical Department" },
+            // { name: "Hackathon", start: "2025-04-06T00:00:00", end: "2025-04-06T23:59:59", venue: "Guest House" },
+            // { name: "aJewel of Jumanji", start: "2025-04-06T10:30:00", end: "2025-04-06T23:59:00", venue: "CSE Dept. Classrooms" },
+            // { name: "aSurvival Symphony", start: "2025-04-06T13:00:00", end: "2025-04-06T23:59:00", venue: "DoME Seminar Hall" },
+            // { name: "aSuit Up", start: "2025-04-06T13:00:00", end: "2025-04-06T23:59:00", venue: "DoChe Seminar Hall 4th Floor" },
+            // { name: "aBudget Battlegrounds", start: "2025-04-06T13:30:00", end: "2025-04-06T23:59:00", venue: "DoChe Seminar Hall 3rd Floor" },
+            // { name: "AI/ML Workshop", start: "2025-04-06T09:00:00", end: "2025-04-06T19:00:00", venue: "ECE Dept. 022" },
+            // { name: "Data Science Workshop", start: "2025-04-06T09:00:00", end: "2025-04-06T19:00:00", venue: "ECE Dept. 203" },
+            // { name: "Cybersecurity Workshop", start: "2025-04-06T09:00:00", end: "2025-04-06T19:00:00", venue: "ECE Dept. 106" },
+            // { name: "Solid Works Workshop", start: "2025-04-06T10:00:00", end: "2025-04-06T17:00:00", venue: "ECE Dept. 106" },
+            // { name: "Weldworks Workshop", start: "2025-04-06T14:00:00", end: "2025-04-06T18:00:00", venue: "Advanced Welding Lab" },
+
+            // { name: "Guest Lecture (Striver - Raj Vikramaditya)", start: "2025-04-07T18:00:00", end: "2025-04-07T20:00:00", venue: "Lawns" },
+            // { name: "Robowar 8KG & 15KG", start: "2025-04-07T16:00:00", end: "2025-04-07T23:00:00", venue: "Canteen Cements" },
+            // { name: "Botkicks", start: "2025-04-07T09:00:00", end: "2025-04-07T16:00:00", venue: "Canteen Cements" },
+            // { name: "Harbour Hustle", start: "2025-04-07T09:00:00", end: "2025-04-07T18:00:00", venue: "Near MB Wall" },
+            // { name: "CTC", start: "2025-04-07T09:00:00", end: "2025-04-07T16:00:00", venue: "SAC Ground" },
+            // { name: "Code Craft", start: "2025-04-07T09:00:00", end: "2025-04-07T13:00:00", venue: "CCC Lab First Floor" },
+            // { name: "Path Finder", start: "2025-04-07T09:00:00", end: "2025-04-07T18:00:00", venue: "Old CRC" },
+            // { name: "aDalal Street", start: "2025-04-07T09:30:00", end: "2025-04-07T23:59:00", venue: "Canteen Cements" },
+            // { name: "aTimeless Tales Arena", start: "2025-04-07T09:30:00", end: "2025-04-07T23:59:00", venue: "DoME Seminar Hall" },
+            // { name: "aManagement Matrix", start: "2025-04-07T13:00:00", end: "2025-04-07T23:59:00", venue: "DoChe Seminar Hall 3rd Floor" },
+            // { name: "aAdventure", start: "2025-04-07T13:00:00", end: "2025-04-07T23:59:00", venue: "DoChe Seminar Hall 4th Floor" },
+            // { name: "UI/UX Workshop", start: "2025-04-07T10:00:00", end: "2025-04-07T13:00:00", venue: "Chemical 011" },
+            // { name: "AWS & DevFlogs (GDG)", start: "2025-04-07T10:00:00", end: "2025-04-07T13:00:00", venue: "Chemical 010" },
+
+            // { name: "Guest Lecture (Ashneer Grover)", start: "2025-04-08T18:00:00", end: "2025-04-08T20:00:00", venue: "Lawns" },
+            // { name: "aGuest Lecture (Prajakta Desai)", start: "2025-04-08T09:00:00", end: "2025-04-08T23:59:00", venue: "Guest House" },
+            // { name: "Robowar 8KG & 15KG (Morning)", start: "2025-04-08T09:00:00", end: "2025-04-08T18:00:00", venue: "Canteen Cements" },
+            // { name: "Robowar 8KG & 15KG (Evening)", start: "2025-04-08T20:00:00", end: "2025-04-08T23:00:00", venue: "Canteen Cements" },
+            // { name: "Codewar", start: "2025-04-08T14:00:00", end: "2025-04-08T18:00:00", venue: "CCC Lab Ground Floor" },
+            // { name: "aIPL Auction", start: "2025-04-08T09:30:00", end: "2025-04-08T23:59:00", venue: "DoCHE Seminar Hall 4th Floor" },
+            // { name: "aCan You Be The King", start: "2025-04-08T09:30:00", end: "2025-04-08T23:59:00", venue: "DoME Seminar Hall" },
+            // { name: "aBollywood Meme-o-logy", start: "2025-04-08T13:00:00", end: "2025-04-08T23:59:00", venue: "DoCHE Seminar Hall 3rd Floor" },
+            // { name: "Prompt Engineering Workshop", start: "2025-04-08T10:00:00", end: "2025-04-08T13:00:00", venue: "EEE Hall" },
+            // { name: "Financial Freedom By Yourself Workshop", start: "2025-04-08T15:00:00", end: "2025-04-08T18:00:00", venue: "DoCSE Seminar Hall" }
+
+        ];
+
+
+    
+        function updateEvents(searchTerm = "") {
+            const now = new Date().getTime();
+            const upcomingEvents = events.filter(event =>
+                new Date(event.date).getTime() > now &&
+                event.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            upcomingEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            const eventContainer = document.getElementById("event-container");
+            eventContainer.innerHTML = "";
+    
+            if (upcomingEvents.length > 0) {
+                const earliestTime = new Date(upcomingEvents[0].date).getTime();
+                const nextEvents = upcomingEvents.filter(event => new Date(event.date).getTime() === earliestTime);
+    
+                nextEvents.forEach(event => {
+                    const eventCard = document.createElement("div");
+                    eventCard.classList.add("event-card");
+                    eventCard.innerHTML = `
+                        <h3>📌 ${event.name}</h3>
+                        <p>📅 ${new Date(event.date).toLocaleString()}</p>
+                        <p class="countdown" data-time="${event.date}"></p>
+                    `;
+                    eventContainer.appendChild(eventCard);
+                });
+            } else {
+                eventContainer.innerHTML = "<p>No matching upcoming events</p>";
+            }
+        }
+    
+        function updateCountdown() {
+            let refreshNeeded = false;
+            document.querySelectorAll(".countdown").forEach(timer => {
+                const eventTime = new Date(timer.getAttribute("data-time")).getTime();
+                const now = new Date().getTime();
+                const timeDiff = eventTime - now;
+    
+                if (timeDiff < 0) {
+                    refreshNeeded = true;
+                    timer.innerText = "Event has started!";
+                } else {
+                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                    timer.innerText = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left`;
+                }
+            });
+    
+            if (refreshNeeded) {
+                setTimeout(() => location.reload(), 2000);
+            }
+        }
+    
+        // 🔍 Event listener for search input
+        document.getElementById("search-input").addEventListener("input", (e) => {
+            updateEvents(e.target.value);
+        });
+    
+        updateEvents();
+        setInterval(updateCountdown, 1000);
+    </script>
+    
+</body>
+</html>
