@@ -88,10 +88,26 @@
             font-size: 1.8rem;
             margin-bottom: 15px;
         }
-    </style>
+    .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        padding: 10px 16px;
+        font-size: 16px;
+        background-color: #222;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 999;
+    }
+
+
+</style>
 </head>
 
 <body>
+    <button class="back-button" onclick="history.back()">⬅️ Back</button>
     <h1>Event Tracker</h1>
     <div id="event-container"></div>
 
@@ -105,7 +121,7 @@
             { name: "Inauguration", start: "2025-04-06T09:00:00", end: "2025-04-06T10:30:00", venue: "Lawns" },
             { name: "Guest Lecture", start: "2025-04-06T18:00:00", end: "2025-04-06T20:00:00", venue: "Lawns" },
             { name: "Science Fair", start: "2025-04-06T10:30:00", end: "2025-04-06T15:00:00", venue: "Staff Club" },
-            { name: "aCar Rally and Drifting Show", start: "2025-04-06T19:30:00", end: "2025-04-06T23:59:00", venue: "Canteen Cements" },
+            { name: "Car Rally and Drifting Show", start: "2025-04-06T19:30:00", end: "2025-04-06T23:59:00", venue: "Canteen Cements" },
             { name: "Robowar 3LB", start: "2025-04-06T09:00:00", end: "2025-04-06T18:00:00", venue: "Canteen Cements" },
             { name: "ElectroDash", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC Lawns" },
             { name: "Farm Track", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC Lawns" },
@@ -195,14 +211,47 @@
                     const cardsWrapper = document.createElement("div");
                     cardsWrapper.className = "event-cards";
 
+                    const now = new Date();
+
                     eventArray.forEach(event => {
+                        const start = new Date(event.start);
+                        const end = new Date(event.end);
+
+                        let className = "";
+                        if (now >= start && now <= end) {
+                            className = "live";
+                        } else if (now < start) {
+                            className = "upcoming";
+                        } else {
+                            className = "completed";
+                        }
+
+                        // Format date to something like: April 5, 2025 (Saturday)
+                        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        const formattedDate = start.toLocaleDateString("en-US", options);
+
                         const eventDiv = document.createElement("div");
                         eventDiv.className = `event ${className}`;
-                        eventDiv.innerHTML = `<strong style="font-size: 1.4rem">${event.name}</strong><br><br>
-                            ⏰ ${formatTime(event.start)} to ${formatTime(event.end)}<br>
-                            📍 <em>${event.venue}</em>`;
+                        eventDiv.innerHTML = `
+        <strong style="font-size: 1.4rem">${event.name}</strong><br><br>
+        📅 <strong>${formattedDate}</strong><br>
+        ⏰ ${formatTime(event.start)} to ${formatTime(event.end)}<br>
+        📍 <em>${event.venue}</em><br>
+    `;
                         cardsWrapper.appendChild(eventDiv);
                     });
+
+
+
+
+                    // eventArray.forEach(event => {
+                    //     const eventDiv = document.createElement("div");
+                    //     eventDiv.className = `event ${className}`;
+                    //     eventDiv.innerHTML = `<strong style="font-size: 1.4rem">${event.name}</strong><br><br>
+                    //         ⏰ ${formatTime(event.start)} to ${formatTime(event.end)}<br>
+                    //         📍 <em>${event.venue}</em>`;
+                    //     cardsWrapper.appendChild(eventDiv);
+                    // });
 
                     eventListDiv.appendChild(cardsWrapper);
                 }
@@ -239,6 +288,8 @@
 
         updateEvents();
         scheduleNextUpdate();
+
+
     </script>
 </body>
 
