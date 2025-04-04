@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Tracker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        #event-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .event-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        .event {
+            width: calc(33.333% - 20px);
+            height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+        }
+
+        @media screen and (max-width: 900px) {
+            .event {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .event {
+                width: 100%;
+            }
+        }
+
+        .event:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .live {
+            background-color: #00c707;
+            color: white;
+        }
+
+        .upcoming {
+            background-color: hsl(0, 99%, 60%);
+            color: white;
+        }
+
+        .completed {
+            background-color: #00aaff;
+            color: #ffffff;
+        }
+
+        .event-list {
+            margin-top: 30px;
+        }
+
+        .event-list h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Event Tracker</h1>
+    <div id="event-container"></div>
+
+    <script>
+        const events = [
+            { name: "Hackathon", start: "2025-04-05T18:00:00", end: "2025-04-05T23:59:59", venue: "Guest House" },
+            { name: "AI/ML Workshop", start: "2025-04-05T18:30:00", end: "2025-04-05T21:30:00", venue: "ECE Department 022" },
+            { name: "Data Science Workshop", start: "2025-04-05T18:30:00", end: "2025-04-05T21:30:00", venue: "ECE Department 203" },
+            { name: "Cybersecurity Workshop", start: "2025-04-05T18:30:00", end: "2025-04-05T21:30:00", venue: "ECE Department 106" },
+
+            { name: "Inauguration", start: "2025-04-06T09:00:00", end: "2025-04-06T10:30:00", venue: "Lawns" },
+            { name: "Guest Lecture", start: "2025-04-06T18:00:00", end: "2025-04-06T20:00:00", venue: "Lawns" },
+            { name: "Science Fair", start: "2025-04-06T10:30:00", end: "2025-04-06T15:00:00", venue: "Staff Club" },
+            { name: "aCar Rally and Drifting Show", start: "2025-04-06T19:30:00", end: "2025-04-06T23:59:00", venue: "Canteen Cements" },
+            { name: "Robowar 3LB", start: "2025-04-06T09:00:00", end: "2025-04-06T18:00:00", venue: "Canteen Cements" },
+            { name: "ElectroDash", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC Lawns" },
+            { name: "Farm Track", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC Lawns" },
+            { name: "Electro Enigma", start: "2025-04-06T11:00:00", end: "2025-04-06T17:00:00", venue: "EE Department" },
+            { name: "Drone Helix", start: "2025-04-06T11:00:00", end: "2025-04-06T16:00:00", venue: "SAC Ground" },
+            { name: "Line Follower", start: "2025-04-06T10:00:00", end: "2025-04-06T18:00:00", venue: "Old CRC" },
+            { name: "Chem E Car", start: "2025-04-06T13:00:00", end: "2025-04-06T16:00:00", venue: "Chemical Department" },
+            { name: "Hackathon", start: "2025-04-06T00:00:00", end: "2025-04-06T23:59:59", venue: "Guest House" },
+            { name: "Jewel of Jumanji", start: "2025-04-06T10:30:00", end: "2025-04-06T23:59:00", venue: "CSE Dept. Classrooms" },
+            { name: "Survival Symphony", start: "2025-04-06T13:00:00", end: "2025-04-06T23:59:00", venue: "DoME Seminar Hall" },
+            { name: "Suit Up", start: "2025-04-06T13:00:00", end: "2025-04-06T23:59:00", venue: "DoChe Seminar Hall 4th Floor" },
+            { name: "Budget Battlegrounds", start: "2025-04-06T13:30:00", end: "2025-04-06T23:59:00", venue: "DoChe Seminar Hall 3rd Floor" },
+            { name: "AI/ML Workshop", start: "2025-04-06T09:00:00", end: "2025-04-06T19:00:00", venue: "ECE Dept. 022" },
+            { name: "Data Science Workshop", start: "2025-04-06T09:00:00", end: "2025-04-06T19:00:00", venue: "ECE Dept. 203" },
+            { name: "Cybersecurity Workshop", start: "2025-04-06T09:00:00", end: "2025-04-06T19:00:00", venue: "ECE Dept. 106" },
+            { name: "Solid Works Workshop", start: "2025-04-06T10:00:00", end: "2025-04-06T17:00:00", venue: "ECE Dept. 106" },
+            { name: "Weldworks Workshop", start: "2025-04-06T14:00:00", end: "2025-04-06T18:00:00", venue: "Advanced Welding Lab" },
+
+            { name: "Guest Lecture (Striver - Raj Vikramaditya)", start: "2025-04-07T18:00:00", end: "2025-04-07T20:00:00", venue: "Lawns" },
+            { name: "Robowar 8KG & 15KG", start: "2025-04-07T16:00:00", end: "2025-04-07T23:00:00", venue: "Canteen Cements" },
+            { name: "Botkicks", start: "2025-04-07T09:00:00", end: "2025-04-07T16:00:00", venue: "Canteen Cements" },
+            { name: "Harbour Hustle", start: "2025-04-07T09:00:00", end: "2025-04-07T18:00:00", venue: "Near MB Wall" },
+            { name: "CTC", start: "2025-04-07T09:00:00", end: "2025-04-07T16:00:00", venue: "SAC Ground" },
+            { name: "Code Craft", start: "2025-04-07T09:00:00", end: "2025-04-07T13:00:00", venue: "CCC Lab First Floor" },
+            { name: "Path Finder", start: "2025-04-07T09:00:00", end: "2025-04-07T18:00:00", venue: "Old CRC" },
+            { name: "Dalal Street", start: "2025-04-07T09:30:00", end: "2025-04-07T23:59:00", venue: "Canteen Cements" },
+            { name: "Timeless Tales Arena", start: "2025-04-07T09:30:00", end: "2025-04-07T23:59:00", venue: "DoME Seminar Hall" },
+            { name: "Management Matrix", start: "2025-04-07T13:00:00", end: "2025-04-07T23:59:00", venue: "DoChe Seminar Hall 3rd Floor" },
+            { name: "Adventure", start: "2025-04-07T13:00:00", end: "2025-04-07T23:59:00", venue: "DoChe Seminar Hall 4th Floor" },
+            { name: "UI/UX Workshop", start: "2025-04-07T10:00:00", end: "2025-04-07T13:00:00", venue: "Chemical 011" },
+            { name: "AWS & DevFlogs (GDG)", start: "2025-04-07T10:00:00", end: "2025-04-07T13:00:00", venue: "Chemical 010" },
+
+            { name: "Guest Lecture (Ashneer Grover)", start: "2025-04-08T18:00:00", end: "2025-04-08T20:00:00", venue: "Lawns" },
+            { name: "aGuest Lecture (Prajakta Desai)", start: "2025-04-08T09:00:00", end: "2025-04-08T23:59:00", venue: "Guest House" },
+            { name: "Robowar 8KG & 15KG (Morning)", start: "2025-04-08T09:00:00", end: "2025-04-08T18:00:00", venue: "Canteen Cements" },
+            { name: "Robowar 8KG & 15KG (Evening)", start: "2025-04-08T20:00:00", end: "2025-04-08T23:00:00", venue: "Canteen Cements" },
+            { name: "Codewar", start: "2025-04-08T14:00:00", end: "2025-04-08T18:00:00", venue: "CCC Lab Ground Floor" },
+            { name: "IPL Auction", start: "2025-04-08T09:30:00", end: "2025-04-08T23:59:00", venue: "DoCHE Seminar Hall 4th Floor" },
+            { name: "Can You Be The King", start: "2025-04-08T09:30:00", end: "2025-04-08T23:59:00", venue: "DoME Seminar Hall" },
+            { name: "Bollywood Meme-o-logy", start: "2025-04-08T13:00:00", end: "2025-04-08T23:59:00", venue: "DoCHE Seminar Hall 3rd Floor" },
+            { name: "Prompt Engineering Workshop", start: "2025-04-08T10:00:00", end: "2025-04-08T13:00:00", venue: "EEE Hall" },
+            { name: "Financial Freedom By Yourself Workshop", start: "2025-04-08T15:00:00", end: "2025-04-08T18:00:00", venue: "DoCSE Seminar Hall" }
+
+        ];
+
+        function formatTime(datetime) {
+            const date = new Date(datetime);
+            let hours = date.getHours();
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            return `${hours}:${minutes} ${ampm}`;
+        }
+
+        function updateEvents() {
+            const now = new Date();
+            const eventContainer = document.getElementById("event-container");
+            eventContainer.innerHTML = "";
+
+            const liveEvents = [];
+            const upcomingEvents = [];
+            const completedEvents = [];
+
+            events.forEach(event => {
+                const startTime = new Date(event.start);
+                const endTime = new Date(event.end);
+
+                if (now >= startTime && now <= endTime) {
+                    liveEvents.push(event);
+                } else if (now > endTime) {
+                    completedEvents.push(event);
+                } else {
+                    upcomingEvents.push(event);
+                }
+            });
+
+            const eventListDiv = document.createElement("div");
+            eventListDiv.className = "event-list";
+
+            function createEventSection(title, eventArray, className) {
+                if (eventArray.length > 0) {
+                    const header = document.createElement("h2");
+                    header.textContent = title;
+                    eventListDiv.appendChild(header);
+
+                    const cardsWrapper = document.createElement("div");
+                    cardsWrapper.className = "event-cards";
+
+                    eventArray.forEach(event => {
+                        const eventDiv = document.createElement("div");
+                        eventDiv.className = `event ${className}`;
+                        eventDiv.innerHTML = `<strong style="font-size: 1.4rem">${event.name}</strong><br><br>
+                            ⏰ ${formatTime(event.start)} to ${formatTime(event.end)}<br>
+                            📍 <em>${event.venue}</em>`;
+                        cardsWrapper.appendChild(eventDiv);
+                    });
+
+                    eventListDiv.appendChild(cardsWrapper);
+                }
+            }
+
+            createEventSection("Live Events", liveEvents, "live");
+            createEventSection("Upcoming Events", upcomingEvents, "upcoming");
+            createEventSection("Completed Events", completedEvents, "completed");
+
+            eventContainer.appendChild(eventListDiv);
+        }
+
+        function scheduleNextUpdate() {
+            const now = new Date();
+            let nextChange = Infinity;
+
+            events.forEach(event => {
+                const start = new Date(event.start).getTime();
+                const end = new Date(event.end).getTime();
+                const nowTime = now.getTime();
+
+                if (start > nowTime) nextChange = Math.min(nextChange, start);
+                if (end > nowTime) nextChange = Math.min(nextChange, end);
+            });
+
+            if (nextChange !== Infinity) {
+                const delay = nextChange - Date.now();
+                setTimeout(() => {
+                    updateEvents();
+                    scheduleNextUpdate();
+                }, delay);
+            }
+        }
+
+        updateEvents();
+        scheduleNextUpdate();
+    </script>
+</body>
+
+</html>
