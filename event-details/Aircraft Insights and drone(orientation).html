@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BML5QKDYNY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-BML5QKDYNY');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details: Aircraft Insights and Drone (Orientation)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <span class="dark-toggle" onclick="toggleDarkMode()">🌙</span>
+
+  <header>
+    <h1>Event Details: Aircraft Insights and Drone (Orientation)</h1>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/Cards.html">Events</a></li>
+        <li><a href="/Categories.html">Categories</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="event-details">
+    <h2>Aircraft Insights and Drone (Orientation)</h2>
+  
+    <!-- 🎯 Poster Image (Click to zoom) -->
+    <img src="/Images/Phoenix Aero.jpeg" 
+         alt="Event Poster" 
+         class="event-poster" 
+         onclick="openFullImage(this.src)" 
+         style="cursor: pointer; border-radius: 12px; margin-bottom: 20px;" />
+  
+    <p><strong>Date:</strong> Wednesday, April 23, 2025</p>
+    <p><strong>Time:</strong> 4:00 PM to 6:00 PM</p>
+    <p><strong>Venue:</strong> DoCSE Seminar Hall</p>
+    <p><strong>Organizer:</strong> Mindbend</p>
+    <p><strong>Description:</strong></p>
+    <p>🔥 Rise Above. Build Beyond. Join Phoenix Aero. 
+
+        Welcome to SVNIT’s premier aerospace & drone-tech team — where passion meets precision, and the sky is just the beginning.
+        
+        At Phoenix Aero , we don’t just build drones and aircraft — we engineer dreams into flight. With hands-on experience, real-world challenges, and cutting-edge design, you’ll grow into the aerospace innovator you were meant to be.
+        
+         Think big. Fly higher. 
+        
+         First year, this is your only chance to join the team and to be part of something extraordinary .
+        <br> Join the WhatsApp group for more updates:- <a href="https://chat.whatsapp.com/GiUxSm8rKe9B7EOOCTVafE">https://chat.whatsapp.com/GiUxSm8rKe9B7EOOCTVafE</a>
+        </p>
+  
+    <div class="event-info">
+      <h3>Key Highlights:</h3>
+      <p><strong>Topics Covered:</strong> Drone Technology, Aircraft Design, UAVs</p>
+      <p><strong>Target Audience:</strong> Students, Enthusiasts, Professionals</p>
+      <p><strong>Activities:</strong> Interactive Session, Live Drone Demonstration</p>
+    </div>
+
+    <div class="buttons">
+        <a href="https://forms.gle/sample-registration" target="_blank">Register Now</a>
+        <a href="/index.html">Back to Home</a>
+      </div>
+  </div>
+  
+  <!-- 🌟 Lightbox Full Image Overlay -->
+  <div id="lightbox" onclick="closeFullImage()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999;">
+    <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:10px;" />
+  </div>
+  
+  <section class="contact-info" id="contact">
+    <h3>Contact Us</h3>
+    <p><strong>Group:</strong> Aryan, Tarun, Umesh, Sheersh</p>
+    <p><strong>Email:</strong> <a href="mailto:nexteventnowbyaryan@gmail.com">nexteventnowbyaryan@gmail.com</a></p>
+  </section>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const icon = document.querySelector(".dark-toggle");
+      icon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+
+  function openFullImage(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeFullImage() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+
+  </script>
+</body>
+
+</html>

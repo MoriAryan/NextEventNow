@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BML5QKDYNY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-BML5QKDYNY');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details: SPARSH- Celebrity Night</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <span class="dark-toggle" onclick="toggleDarkMode()">🌙</span>
+
+  <header>
+    <h1>Event Details: SPARSH- Celebrity Night</h1>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/Cards.html">Events</a></li>
+        <li><a href="/Categories.html">Categories</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="event-details">
+    <h2>SPARSH- Celebrity Night</h2>
+  
+    <!-- 🎯 Poster Image (Click to zoom) -->
+    <img src="/Images/celebrity.jpeg" 
+         alt="Event Poster" 
+         class="event-poster" 
+         onclick="openFullImage(this.src)" 
+         style="cursor: pointer; border-radius: 12px; margin-bottom: 20px;" />
+  
+    <p><strong>Date:</strong> Wednesday, April 23, 2025</p>
+    <p><strong>Time:</strong> 4:00 PM to 6:00 PM</p>
+    <p><strong>Venue:</strong> DoCSE Seminar Hall</p>
+    <p><strong>Organizer:</strong> Mindbend</p>
+    <p><strong>Description:</strong></p>
+    <p>🎤✨ Brace yourselves for a night dipped in pure magic and melody! ✨🎤
+        SPARSH 2K25 is pulling out all the stops to give you a night to remember...
+        <br><br>
+        💫 The voice that stole our hearts with Sun Raha Hai Na Tu, the maestro of emotions,
+        <br>🎶 The one and only ANKIT TIWARI is coming to rock our Celebrity Night! 💥
+        <br><br>
+        From soul-touching ballads to electrifying anthems, he’s bringing the entire vibe with him – and trust us, you do NOT want to miss this musical rollercoaster! 🎧❤️<br>
+        Coordinators: <br>
+        Divyanshu Mishra:+919327565790</p>
+  
+    <div class="event-info">
+      <h3>Key Highlights:</h3>
+      <p><strong>Topics Covered:</strong> Drone Technology, Aircraft Design, UAVs</p>
+      <p><strong>Target Audience:</strong> Students, Enthusiasts, Professionals</p>
+      <p><strong>Activities:</strong> Interactive Session, Live Drone Demonstration</p>
+    </div>
+
+    <div class="buttons">
+        <!-- <a href="https://forms.gle/sample-registration" target="_blank">Register Now</a> -->
+        <a href="/index.html">Back to Home</a>
+      </div>
+  </div>
+  
+  <!-- 🌟 Lightbox Full Image Overlay -->
+  <div id="lightbox" onclick="closeFullImage()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999;">
+    <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:10px;" />
+  </div>
+  
+  <section class="contact-info" id="contact">
+    <h3>Contact Us</h3>
+    <p><strong>Group:</strong> Aryan, Tarun, Umesh, Sheersh</p>
+    <p><strong>Email:</strong> <a href="mailto:nexteventnowbyaryan@gmail.com">nexteventnowbyaryan@gmail.com</a></p>
+  </section>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const icon = document.querySelector(".dark-toggle");
+      icon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+
+  function openFullImage(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeFullImage() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+
+  </script>
+</body>
+
+</html>

@@ -4,36 +4,44 @@
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BML5QKDYNY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+      
+        gtag('config', 'G-BML5QKDYNY');
+      </script>
+      
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextEventNow - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body.dark-mode {
-    background: #0f172a;
+    background: #162035;
     color: #e0e7ff;
 }
 
 body.dark-mode .event-card {
     background: #1e293b;
-    border-left: 6px solid #3b82f6;
+    /* border-left: 0; */
 }
 
 body.dark-mode .hero {
-    background: linear-gradient(to bottom right, #4b0082, #3b3b98);
+    background: linear-gradient(to bottom right, #000000, #000000);
 }
 
 body.dark-mode header {
+    background: linear-gradient(to right, #0b1a33, #37398b);
+}
+body.dark-mode .next-event{
+    background: linear-gradient(to right, #3b82f6, #6366f1);
+}
+body.dark-mode .search-event{
     background: linear-gradient(to right, #3b82f6, #6366f1);
 }
 
-body.dark-mode .contact-info {
-    background: #111827;
-}
 
-body.dark-mode .contact-simple {
-    background: #111827;
-}
 
 
         html { scroll-behavior: smooth; }
@@ -43,6 +51,8 @@ body.dark-mode .contact-simple {
             background: linear-gradient(135deg, #eef2f3, #f9f9f9);
             color: #1f2937;
             line-height: 1.6;
+    transition: background-color 0.5s, color 0.5s;
+
         }
         header {
             background: linear-gradient(to right, #3b82f6, #6366f1);
@@ -198,6 +208,7 @@ body.dark-mode .contact-simple {
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <span class="dark-toggle" onclick="toggleTheme()" style="position: absolute; top: 25px; right: 30px; font-size: 24px; cursor: pointer;">🌙</span>
     </header>
 
     <section class="hero">
@@ -207,7 +218,7 @@ body.dark-mode .contact-simple {
         <input type="text" id="search-input" placeholder="Search events by name...">
     </section>
 
-    <section id="search-results-section" class="next-event" style="display:none; animation: fadeIn 0.5s ease;">
+    <section id="search-results-section" class="search-event" style="display:none; animation: fadeIn 0.5s ease;">
         <h2>Search Results</h2>
         <div id="search-results"></div>
     </section>
@@ -228,7 +239,10 @@ body.dark-mode .contact-simple {
     <script>
         function toggleTheme() {
     document.body.classList.toggle('dark-mode');
+    const icon = document.querySelector('.dark-toggle');
+    icon.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
 }
+
 
         function getEventStatus(start, end) {
             const now = new Date();
@@ -326,7 +340,7 @@ body.dark-mode .contact-simple {
                 filtered.forEach(event => {
                     const status = getEventStatus(event.start, event.end);
                     const card = document.createElement("div");
-                    card.className = `event-card ${status}`;
+                    card.className = `event-card ${status} `;
                     card.innerHTML = `
                         <span class="status-label status-${status}">${status.toUpperCase()}</span>
                         <h3>📌 ${highlightMatch(event.name, searchTerm)}</h3>
@@ -343,6 +357,7 @@ body.dark-mode .contact-simple {
 
         fetchAndDisplayNextEvent();
         setInterval(updateCountdown, 1000);
+    
 
         
     </script>
